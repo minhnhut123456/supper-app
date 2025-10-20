@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const getStyleLoaders = require("./wp-loaders");
 
 module.exports = {
   mode: "development",
@@ -24,6 +25,38 @@ module.exports = {
             ],
           },
         },
+      },
+      // CSS
+      {
+        test: /\.css$/,
+        exclude: /\.module\.css$/,
+        use: getStyleLoaders({ cssModules: false }, true, true),
+        sideEffects: true,
+      },
+      // CSS Module
+      {
+        test: /\.module\.css$/,
+        use: getStyleLoaders({ cssModules: true }, true, true),
+      },
+      // SCSS
+      {
+        test: /\.s[ac]ss$/,
+        exclude: /\.module\.s[ac]ss$/,
+        use: getStyleLoaders(
+          { cssModules: false, preProcessor: "sass-loader" },
+          true,
+          true
+        ),
+        // sideEffects: true,
+      },
+      // SCSS Module
+      {
+        test: /\.module\.s[ac]ss$/,
+        use: getStyleLoaders(
+          { cssModules: true, preProcessor: "sass-loader" },
+          true,
+          true
+        ),
       },
     ],
   },
