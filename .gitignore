@@ -25,3 +25,6 @@ yarn-error.log*
 **/.yarn/cache
 **/.yarn/build-state.yml
 **/.yarn/install-state.gz
+
+# module-federation
+**/__mf__temp
