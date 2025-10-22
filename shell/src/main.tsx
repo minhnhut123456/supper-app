@@ -1,5 +1,18 @@
-import styles from "./styles.module.css";
+import { createRoot } from "react-dom/client";
+import { createBrowserRouter } from "react-router";
+import { RouterProvider } from "react-router/dom";
+// console.log(debounce);
 
-export default function App() {
-  return <div className={styles.container}>Hello SCSS Module!</div>;
-}
+import "./index.css";
+import AuthLayout from "./components/auth-layout";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: AuthLayout,
+  },
+]);
+
+const root = document.getElementById("root");
+
+createRoot(root!).render(<RouterProvider router={router} />);

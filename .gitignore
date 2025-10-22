@@ -27,4 +27,4 @@ yarn-error.log*
 **/.yarn/install-state.gz
 
 # module-federation
-**/__mf__temp
+**/.__mf__temp
