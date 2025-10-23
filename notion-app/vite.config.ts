@@ -1,6 +1,5 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
 import { federation } from "@module-federation/vite";
 import path from "path";
 import dep from "./package.json";
@@ -8,15 +7,21 @@ import dep from "./package.json";
 // https://vite.dev/config/
 export default defineConfig({
   server: {
-    origin: "http://localhost:3000",
-    port: 3000,
+    origin: "http://localhost:3001",
+    port: 3001,
+  },
+  preview: {
+    port: 5001,
   },
   plugins: [
     react(),
-    tailwindcss(),
     federation({
-      name: "shell",
-      manifest: true,
+      // Make it as same as remote name in shell
+      name: "notion-remote-app",
+      filename: "remoteEntry.js",
+      exposes: {
+        "./app": "./src/app-in-shell.tsx",
+      },
       shared: {
         react: {
           requiredVersion: dep.dependencies.react,
@@ -44,15 +49,6 @@ export default defineConfig({
         // --> only react and react/ are shared, because it load in first import
         "lodash-es": {
           singleton: true,
-        },
-      },
-      remotes: {
-        // Sau khi test nhieu lan, key phai trung name moi work, ko care name cua remote
-        "notion-app": {
-          type: "module",
-          name: "notion-app",
-          entry: "http://localhost:5001/remoteEntry.js",
-          shareScope: "default",
         },
       },
     }),
