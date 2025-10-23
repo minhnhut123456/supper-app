@@ -5,6 +5,7 @@ import { RouterProvider } from "react-router/dom";
 
 import "./index.css";
 import AuthLayout from "./components/auth-layout";
+window.__IS_SHELL_ENVIRONMENT__ = true;
 
 const router = createBrowserRouter([
   {
